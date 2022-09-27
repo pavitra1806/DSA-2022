@@ -1,0 +1,33 @@
+// O(n)
+
+#include <iostream>
+
+using namespace std;
+
+void cyclic_rotate_by_one(int arr[], int s, int e)
+{
+    if(s>e)
+    {
+        return;
+    }
+    
+    int t=arr[s];
+    arr[s]=arr[e];
+    arr[e]=t;
+    
+    cyclic_rotate_by_one(arr,s+1, e-1);
+}
+
+int main()
+{
+    int arr[] = {1,2,3,4,5};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    int i;
+    
+    cyclic_rotate_by_one(arr,0,n-1);
+    
+    for(i=0;i<n;i++)
+    {
+        cout << arr[i] << " " << endl;
+    }
+}
