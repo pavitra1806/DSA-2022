@@ -1,0 +1,36 @@
+33/90 testcases passed....time exceeded
+
+class solution {
+public:
+     vector<int>solvequeries(vector<int>num,  vector<vector<int>>Queries, int k) {
+     
+          vector<int> return_ele;
+          int count;
+          int j=0, l=0;
+          
+          for(int i=0; i<Queries.size();i++)
+          {
+              int a = Queries[j][l]-1;
+              int b = Queries[j][++l]-1;
+              count = 0 ;
+              unordered_map<int , int> m;
+              
+              for(int c=a;c<=b;c++)
+              {
+                  m[nums[c]]++;
+              }
+              
+              for(auto q:m)
+              {
+                  if(q.second>=k)
+                  {
+                      count++;
+                  }
+              }
+              return_ele.push_back(count);
+              j++;
+              l--;
+          }
+          return return_ele;
+      }
+  };
