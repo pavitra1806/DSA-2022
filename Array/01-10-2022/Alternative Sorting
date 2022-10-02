@@ -1,0 +1,71 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution{
+
+
+	public:
+	vector<int> alternateSort(int arr[], int N)
+	{
+	    int i,j;
+	    vector<int> v;
+	    
+	    
+	    for(i=0;i<N-1;i++)
+	    {
+	        for(j=i+1;j<N;j++)
+	        {
+	            if(i%2==0)
+	            {
+	                if(arr[i]<arr[j])
+	                {
+	                    swap(arr[i],arr[j]);
+	                    
+	                }
+	            }
+	            else if(arr[i]>arr[j])
+	            {
+	                swap(arr[i],arr[j]);
+	                
+	            }
+	        }
+	        v.push_back(arr[i]);
+	    }
+	    v.push_back(arr[i]);
+	    return v;
+	}
+
+};
+	
+
+//{ Driver Code Starts.
+
+int main() 
+{
+   	
+   	int t;
+    cin >> t;
+    while (t--)
+    {
+    	int n;
+       	
+		cin>>n;
+		int a[n];
+		for(int i=0;i<n;++i)
+			cin>>a[i];
+       
+
+        Solution ob;
+        vector<int> ans = ob.alternateSort(a, n);
+        for(auto i:ans)
+        	cout << i << " ";
+	    cout << "\n";
+	     
+    }
+    return 0;
+}
+
+
+// } Driver Code Ends
