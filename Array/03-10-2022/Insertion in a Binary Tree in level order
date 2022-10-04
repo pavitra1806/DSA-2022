@@ -1,0 +1,93 @@
+#include <iostream>
+#include "queue"
+using namespace std;
+
+struct node{
+  int data;
+  struct node *left;
+  struct node *right;
+};
+
+struct node* createnode(int data)
+{
+    struct node *newnode = new node();
+    if(!newnode)
+    {
+        return NULL;
+    }
+    
+    newnode->data = data;
+    newnode->left = NULL;
+    newnode->right = NULL;
+    
+    return newnode;
+}
+
+struct node* insertnode(struct node *root, int data)
+{
+    if(root == NULL)
+    {
+        root = createnode(data);
+        return root;
+    }
+    
+    queue<struct node *> q;
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        struct node * temp = q.front();
+        q.pop();
+        
+        if(temp->left!=NULL)
+        {
+            q.push(temp->left);
+        }
+        else
+        {
+            temp->left = createnode(data);
+            return root;
+        }
+        
+        if(temp->right!=NULL)
+        {
+            q.push(temp->right);
+        }
+        else
+        {
+            temp->right = createnode(data);
+            return root;
+        }
+        
+    }
+    
+}
+
+void inorder(struct node *temp)
+{
+    if(temp==NULL)
+    {
+        return;
+    }
+    
+    inorder(temp->left);
+    cout << temp->data << " ";
+    inorder(temp->right);
+}
+
+int main() {
+    
+    struct node *root = createnode(1);
+    root->left = createnode(12);
+    root->right = createnode(3);
+    
+    root->left->left = createnode(4);
+    root->left->right = createnode(6);
+    
+	inorder(root);
+	cout << endl;
+	root = insertnode(root, 7);
+	cout << endl;
+	inorder(root);
+	
+}
