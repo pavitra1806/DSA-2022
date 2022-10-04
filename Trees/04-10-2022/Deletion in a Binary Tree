@@ -1,1 +1,191 @@
+#include <iostream>
+#include "queue"
+using namespace std;
 
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node * createnode(int data)
+{
+    struct node *temp = new node();
+    if(!temp)
+    {
+        return NULL;
+    }
+    
+    temp->data = data;
+    temp->left = NULL;
+    temp->right = NULL;
+    
+    return temp;
+}
+
+struct node *insertnode(struct node *root, int data)
+{
+    if(root==NULL)
+    {
+        root = createnode(data);
+        return root;
+    }
+    
+    queue<struct node *> q;
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        struct node *temp = q.front();
+        q.pop();
+        
+        if(temp->left!=NULL)
+        {
+            q.push(temp->left);
+        }
+        else
+        {
+            temp->left = createnode(data);
+            return root;
+        }
+        
+        if(temp->right!=NULL)
+        {
+            q.push(temp->right);
+        }
+        else
+        {
+            temp->right = createnode(data);
+            return root;
+        }
+    }
+     
+}
+
+void delete_d(struct node *root, struct node *del)
+{
+    queue<struct node*> q;
+    q.push(root);
+    struct node *temp;
+    
+    while(!q.empty())
+    {
+        temp = q.front();
+        q.pop();
+        if(temp == del)
+        {
+            temp = NULL;
+            delete(del);
+            return;
+        }
+        
+        if(temp->left)
+        {
+            if(temp->left == del)
+            {
+                temp->left = NULL;
+                delete(del);
+                return;
+            }
+            else
+                q.push(temp->left);
+        }
+        if(temp->right)
+        {
+            if(temp->right == del)
+            {
+                temp->right = NULL;
+                delete(del);
+                return;
+            }
+            else
+                q.push(temp->right);
+        }
+    }
+}
+
+struct node *deletenode(struct node *root, int key)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    
+    if(root->left==NULL && root->right==NULL)
+    {
+        if(root->data == key)
+        {
+            return NULL;
+        }
+        else
+            return root;
+    }
+    
+    queue<struct node *> q;
+    q.push(root);
+    
+    struct node *temp;
+    struct node *keynode = NULL;
+    
+    while(!q.empty())
+    {
+        temp = q.front();
+        q.pop();
+        
+        if(temp->data == key)
+        {
+            keynode = temp;
+        }
+        
+        if(temp->left)
+        {
+            q.push(temp->left);
+        }
+        if(temp->right)
+        {
+            q.push(temp->right);
+        }
+    }
+    
+    if(keynode!=NULL)
+    {
+        int x = temp->data;
+        delete_d(root, temp);
+        keynode->data = x;
+    }
+    
+  
+    return root;
+}
+
+void inorder(struct node *temp)
+{
+    if(temp==NULL)
+    {
+        return;
+    }
+    
+    inorder(temp->left);
+    cout << temp->data << " ";
+    inorder(temp->right);
+}
+
+int main() {
+    
+    struct node *root = createnode(1);
+    root->left = createnode(2);
+    root->right = createnode(3);
+    
+    root->left->left = createnode(4);
+    root->left->right = createnode(5);
+    
+    inorder(root);
+    cout << endl;
+    root = insertnode(root, 12);
+    inorder(root);
+    cout << endl;
+    
+	root = deletenode(root, 4);
+	inorder(root);
+}
