@@ -1,0 +1,45 @@
+bool check_tree_structure(Node *a, Node *b)
+{
+    if(a==NULL && b==NULL)
+    {
+        return true;
+    }
+    
+    if(a!=NULL && b!=NULL && check_tree_structure(a->left, b->left) && check_tree_structure(a->right, b->right));
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+void mirror(Node *node)
+{
+    if(node==NULL)
+    {
+        return;
+    }
+    
+    mirror(node->left);
+    mirror(node->right);
+    swap(node->left, node->right);
+}
+
+//Function to check whether a binary tree is foldable or not.
+bool IsFoldable(Node* root)
+{
+    bool result;
+    
+    if(root==NULL)
+    {
+        return true;
+    }
+    
+    mirror(root->left);
+    
+    result = check_tree_structure(root->left, root->right);
+    
+    mirror(root->left);
+    
+    return result;
+}
