@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include<string>
+using namespace std;
+
+
+void find_diff(string str1, string str2, int m, int n)
+{
+    int carry = 0;
+    int i = 0;
+    int *res;
+    
+    reverse(str1.begin(), str1.end());
+    reverse(str2.begin(), str2.end());
+    
+    while(i<n)
+    {
+        if(carry == 1)
+        {
+            stoi(str1[i])--;
+            if((stoi(str1[i]) - stoi(str2[i])) < 0)
+            {
+                res[i] = (stoi(str1[i]) + 10) - stoi(str2[i]);
+                i++;
+                carry = 1;
+            }
+            else
+            {
+                res[i] = stoi(str1[i]) - stoi(str2[i]);
+                i++;
+                carry = 0;
+            }
+        }
+        else
+        {
+            if((stoi(str1[i]) - stoi(str2[i])) < 0)
+            {
+                res[i] = (stoi(str1[i]) + 10) - stoi(str2[i]);
+                i++;
+                carry = 1;
+            }
+            else
+            {
+                res[i] = stoi(str1[i]) - stoi(str2[i]);
+                i++;
+                carry = 0;
+            }
+        }
+    }
+    
+    int  k = i;
+    while(k<m)
+    {
+        if(carry ==1)
+        {
+            res[i] = stoi(str1[i]) - 0;
+            i++;
+        }
+        else
+        {
+            res[i] = stoi(str1[i]);
+            i++;
+        }
+    }
+    
+    int h=sizeof(res)/sizeof(res[0]);
+    
+    for(int j=h-1; j>=0; j--)
+    {
+        cout << res[j] << endl;
+    }
+    // reverse(res.begin(), res.end());
+}
+
+int main()
+{
+	string str1[] = "11443333311111111100";
+	string str2[] = "1144422222221111";
+	
+	int m = strlen(str1);
+	int n = strlen(str2);
+	
+	find_diff(str1, str2, m, n);
+	
+}
