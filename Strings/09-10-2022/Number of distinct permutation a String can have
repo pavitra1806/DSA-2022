@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+#include <unordered_map> 
+
+int find_fact(int n)
+{
+    if(n==0)
+    {
+        return 1;
+    }
+    else
+    {
+        return n*find_fact(n-1);
+    }
+    
+}
+
+int find_permutation(string str, int len)
+{
+    int p;
+    unordered_map<char, int> m;
+    
+    for(int i=0;i<len;i++)
+    {
+        m[str[i]]++;
+    }
+    
+    p = find_fact(len);
+    
+    for(auto j:m)
+    {
+        p = p / find_fact(j.second);
+    }
+
+    return p;
+}
+
+int main() {
+	
+	string str = "fvvfhvgv";
+	
+	int len = str.length();
+	
+	int per = find_permutation(str, len);
+	
+	cout << per << endl;
+	return 0;
+}
