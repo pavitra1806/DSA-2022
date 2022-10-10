@@ -19,13 +19,13 @@ string find_diff(string str1, string str2, int m, int n)
         {
             if((str1[i] - '0') - (str2[i] - '0') < 0)
             {
-                sub = ((str1[i] - '0') + 10) - (str2[i] - '0');
+                sub = ((str1[i] - '0') + 10) - (str2[i] - '0') - carry;
                 i++;
                 carry = 1;
             }
             else
             {
-                sub = (str1[i] - '0') - (str2[i]-'0');
+                sub = (str1[i] - '0') - (str2[i]-'0') - carry;
                 i++;
                 carry = 0;
             }
