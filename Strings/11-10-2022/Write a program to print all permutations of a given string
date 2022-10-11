@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include<string>
+using namespace std;
+
+
+void permutation(string str, int l, int r)
+{
+    int i;
+    
+    if(l==r)
+    {
+        cout << str << endl;
+    }
+    else
+    {
+        for(i=l; i<=r ;i++)
+        {
+        swap(str[l], str[i]);
+        permutation(str, l+1, r);
+        swap(str[l], str[i]);
+        }
+    }
+    
+}
+
+int main()
+{
+	string str1 = "abc";
+	
+	int m = str1.length();
+	
+	permutation(str1, 0, m-1);
+	
+}
