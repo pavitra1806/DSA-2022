@@ -1,0 +1,57 @@
+
+#include<iostream>
+using namespace std;
+#include<string>
+#include <bits/stdc++.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+void push(struct node **head, int data)
+{
+    struct node* tmp = (struct node*)malloc(sizeof(struct node));
+    
+  
+        tmp->data  = data;
+        tmp->next = *head;
+        *head = tmp;
+    
+}
+
+void get_nth_node(struct node *head, int key)
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    else
+    {
+        struct node *tmp = head;
+        int count =0;
+        while(tmp != NULL)
+        {
+            if(count==key)
+            {
+                cout << tmp->data << endl;
+            }
+            tmp = tmp->next;
+            count++;
+        }
+    }
+}
+
+int main()
+{
+  struct node* head = NULL;
+  int k = 0;
+  push(&head, 1);
+  push(&head, 80);
+  push(&head, 3);
+  push(&head, 22);
+  
+  get_nth_node(head, k);
+  
+}
