@@ -1,0 +1,46 @@
+//{ Driver Code Starts
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void reverseWords(string S) 
+{ 
+        int i;
+        int len = S.length();
+        i = len;
+        vector<string> str;
+        string str2 = "";
+        
+        while(S[i] != '\0')
+        {
+            if(S[i] != '.')
+            {
+                str2+=S[i];
+            }
+            else
+            {
+                str.push_back(str2);
+                str.push_back(".");
+                str2 = "";
+            }
+            i--;
+        }
+        
+        for(auto m:str)
+        {
+            cout<<m;
+        }
+        
+}
+
+//{ Driver Code Starts.
+int main() 
+{
+
+    string s = "i.like.this.program.very.much";
+    reverseWords(s);
+    
+    
+}
+// } Driver Code Ends
