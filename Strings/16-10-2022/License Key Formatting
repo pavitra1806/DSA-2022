@@ -1,0 +1,86 @@
+//{ Driver Code Starts
+/* Driver program to test above function */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//Back-end complete function Template for C++
+class Solution
+{
+   public:
+    string ReFormatString(string S, int K){
+    	
+    	int n = S.size();
+    	string str="";
+    	
+    	
+    	for(int i=0;i<n;i++)
+    	{
+    	    if(S[i] == '-')
+    	    {
+    	        S.erase(S.begin() + i);
+    	        i--;
+    	    }
+    	    
+    	}
+    	//cout << S << endl;
+    	for(int i=0;i<n;i++)
+    	{
+    	    if(S[i] >= 'a' && S[i] <= 'z')
+    	    {
+    	        S[i] = S[i] -32;
+    	    }
+    	}
+    	
+    	//cout << S << endl;
+    	
+        int count=0;
+        int l = S.size();
+    	for(int i=l-1;i>=0;i-=K)
+    	{
+    	    if((i-K+1) < 0)
+    	    {
+    	        str+=S.substr(0, i+1);
+    	    }
+    	    else
+    	    {
+    	        string str1="";
+    	        str1+= S.substr(i-K+1, K);
+    	        reverse(str1.begin(), str1.end());
+    	        str+=str1;
+    	        str1="";
+    	    }
+    	    str+="-";
+    	    
+    	}
+    	int h = str.size();
+    	h--;
+    	
+    	if(str[h] == '-')
+    	{
+    	    str.erase(str.begin()+h);
+    	}
+    	
+    	reverse(str.begin(), str.end());
+    	return str;
+    }
+};
+
+//{ Driver Code Starts.
+int main()
+{
+
+	    string S = "5F3Z-2e-9-w";
+	   
+	    int K=4;
+	   
+	    Solution ob;  
+	    string ans=ob.ReFormatString(S, K);
+	    cout<<ans;
+	    cout<<"\n";
+	
+	return 0;
+}
+
+// } Driver Code Ends
