@@ -1,0 +1,56 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+
+class Solution{
+  public:
+  
+  void permute(vector<string> &v, string a, int l, int r)
+  {
+      if(l==r)
+      {
+          v.push_back(a);
+      }
+      else
+      {
+          for(int i=l; i<=r;i++)
+          {
+              swap(a[l],a[i]);
+              permute(v, a, l+1, r);
+              swap(a[l],a[i]);
+          }
+      }
+  }
+  
+    long long findRank(string str) {
+        
+        int n = str.size();
+        vector<string> v;
+        
+        permute(v, str, 0, n-1);
+        
+        int b = v.size();
+        
+        for(int i=0;i<b;i++)
+        {
+            cout << v[i] << endl;
+        }
+    }
+};
+
+//{ Driver Code Starts.
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        string s;
+        cin>>s;
+        Solution obj;
+        long long ans = obj.findRank(s);
+        cout<<ans<<endl;
+    }
+}
+// } Driver Code Ends
