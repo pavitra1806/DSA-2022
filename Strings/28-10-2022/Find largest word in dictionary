@@ -1,0 +1,72 @@
+//{ Driver Code Starts
+// Initial Template for C++
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+// User function Template for C++
+
+#include <bits/stdc++.h> 
+class Solution {
+  public:
+  
+    int lcs(char *X, char *Y, int m, int n)
+    {
+        if(m==0 || n==0)
+        {
+            return 0;
+        }
+        if(X[m-1] == Y[n-1])
+        {
+            return 1 + lcs(X, Y, m-1, n-1);
+        }
+        else
+            return max(lcs(X, Y, m, n-1), lcs(X, Y, m-1, n)); 
+    }
+  
+    string findLongestWord(string S, vector<string> d) {
+        
+        int len = d.size();
+        int n = strlen(S);
+        vector<int> count1;
+        
+     
+        for(int i=0; i<len; i++)
+        {
+            int m = strlen(d[i]);
+            int count = lcs(d[i], S, m, n);
+            count1.push_back(count);
+        }
+        
+        int max = INT_MIN;
+        for(int i=0;i<len;i++)
+        {
+            if(max<count1[i])
+            {
+                max = count1[i];
+                index = i;
+            }
+        }
+        
+        return d[index];
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<string> d(n + 1);
+        for (int i = 0; i < n; i++) cin >> d[i];
+        string S;
+        cin >> S;
+        Solution ob;
+        cout << ob.findLongestWord(S, d) << endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
